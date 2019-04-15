@@ -5,6 +5,7 @@
   * [Motivation](#motivation)
   * [File Structure](#file-structure)
   * [Licensing, Authors, and Acknowledgement](#licensing--authors--and--acknowledgement)
+  * [Medium Post](#Medium Post)
 
 ## Installation
 
@@ -30,6 +31,8 @@
 
 Data Science Nanodegree project 
 
+Here is a link to a link 
+
 
 
 ## File Structure 
@@ -45,4 +48,8 @@ each column name
 
 Data is directly taken from [StackOverflow](https://insights.stackoverflow.com/survey/) and licensed 
 under the [ODbl license](https://opendatacommons.org/licenses/odbl/1.0/)
+
+## Medium Post
+
+Here is the link to the [post](https://medium.com/@drrylbalderas/black-and-brown-in-the-flow-e17aa32876ea)
 
