@@ -104,3 +104,8 @@ venv.bak/
 .mypy_cache/
 
 .idea/
+
+survey_results_schema.csv
+survey_results_public2018.csv
+survey_results_public2017.csv
+survey_results_public.csv
