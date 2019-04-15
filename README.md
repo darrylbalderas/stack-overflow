@@ -1,11 +1,16 @@
 # Stack Overflow Developer Survey Analysis
 
 ## Table of Contents
-  * [Installation](#installation)
   * [Motivation](#motivation)
+  * [Installation](#installation)
+  * [Start Project](#Start)
   * [File Structure](#file-structure)
   * [Licensing, Authors, and Acknowledgement](#licensing--authors--and--acknowledgement)
   * [Medium Post](#Medium Post)
+
+## Motivation 
+
+   Data Science Nanodegree project to showcase my application of CRISP-DM standard
 
 ## Installation
 
@@ -27,21 +32,21 @@
      
     `pip install -r requirements.txt`
 
-## Motivation 
+## Start
 
-Data Science Nanodegree project 
-
-Here is a link to a link 
-
-
+- Install project dependencies 
+     
+    `jupyter notebook survey-analysis.ipynb`
 
 ## File Structure 
 
 1. `survey-analysis.ipynb` - juypter notebook that contains my analysis of the 2019 Stack Overflow Developer 
 Survey dataset
-2. `survey_results_public.csv` - CSV file with main survey results, one respondent per row and 
+2. `survey_results_public2017.csv` - CSV file with main 2017 survey results, one respondent per row and 
 one column per answer 
-3. `survey_results_schema.csv` - CSV file with survey schema, i.e., the questions that correspond to 
+3. `survey_results_public2018.csv` - CSV file with main 2018 survey results, one respondent per row and 
+one column per answer 
+4. `survey_results_schema.csv` - CSV file with survey schema, i.e., the questions that correspond to 
 each column name
 
 ## Licensing, Authors, and Acknowledgement
