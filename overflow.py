@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import seaborn as sb
 import matplotlib.pyplot as plt
 from collections import defaultdict
 
@@ -65,6 +64,7 @@ def remove_outliers(df, column):
 
 def get_education_degrees(education_counts, educations):
     """
+    Gets a map count of the formal educations that was provided in the survey
     """
     education_degrees = defaultdict(int)
     for e in educations:
@@ -79,28 +79,24 @@ def clean_multi_answers(df, index_name, column_name):
     Returns a dataframe that contains the value
     count for a given column
     """
+    def total_count(df, index_name, column_name):
+        new_df = df[column_name].value_counts().reset_index()
+        new_df.rename(columns={'index': index_name, column_name: 'count'}, inplace=True)
+        counts = defaultdict(int)
+        for answer in parse_multi_answer(df, column_name):
+            for idx in range(new_df.shape[0]):
+                developer_answers = [entry.strip() for entry in new_df[index_name][idx].split(";")]
+                if answer in developer_answers:
+                    counts[answer] += int(new_df['count'][idx])
+        counts = pd.DataFrame(pd.Series(counts)).reset_index()
+        counts.columns = [index_name, 'count']
+        counts.sort_values('count', ascending=False, inplace=True)
+        return counts
+
     answer_df = total_count(df, index_name, column_name)
     answer_df.set_index(index_name, inplace=True)
     return answer_df
 
-
-def total_count(df, index_name, column_name):
-    """
-    Returns a dataframe that contains the value
-    count for a given column
-    """
-    new_df = df[column_name].value_counts().reset_index()
-    new_df.rename(columns={'index': index_name, column_name: 'count'}, inplace=True)
-    counts = defaultdict(int)
-    for answer in parse_multi_answer(df, column_name):
-        for idx in range(new_df.shape[0]):
-            developer_answers = [entry.strip() for entry in new_df[index_name][idx].split(";")]
-            if answer in developer_answers:
-                counts[answer] += int(new_df['count'][idx])
-    counts = pd.DataFrame(pd.Series(counts)).reset_index()
-    counts.columns = [index_name, 'count']
-    counts.sort_values('count', ascending=False, inplace=True)
-    return counts
 
 
 def parse_multi_answer(df, column):
@@ -125,6 +121,6 @@ def plot_race_distribution(df, title, color='red'):
     ax.barh(races, counts, 0.35, color=color)
     ax.set_title(title)
     ax.set_ylabel('Race')
-    ax.set_xlabel('Sruvey Entrees Percentage')
+    ax.set_xlabel('Survey Entrees Percentage')
     plt.savefig('race-ethnicities', bbox_inches='tight')
     plt.show()
