@@ -124,3 +124,46 @@ def plot_race_distribution(df, title, color='red'):
     ax.set_xlabel('Survey Entrees Percentage')
     plt.savefig('race-ethnicities', bbox_inches='tight')
     plt.show()
+
+
+def get_total_latinx_black_count(df):
+    """
+    Returns a count of entries that were from a latinx or black race ethnicity
+    """
+    latinx_black = df.index.isin(['Hispanic or Latino/Latina', 'Black or of African descent'])
+    return np.sum(df[latinx_black].values)
+
+
+def display_statistics(df, count, year):
+    """
+    Displays count of entries that were from a latinx or black race ethnicity
+    And latinx or black entry percentage
+    """
+    percentage = (count / np.sum(df.values)) * 100
+    print("\n{} individuals reported as Latinx/Black participated in the {} Stack Overflow Developer survey".format(count, year))
+    print("Latinx/Black account for {:0.3f}% of the {} Stack Overflow survey participants".format(percentage, year))
+
+
+def plot_countries_ethnicities(df, df1, conditional, title, title2, color, num_countries):
+    """
+    Plots bar graphs for two dataframes to show how many latinx or black folks are
+    in various countries
+    """
+    data_2017 = df.loc[get_indexes(df, "Race", conditional), :].reset_index()
+    data_2017['Country'].value_counts()[:num_countries][::-1].plot(kind="barh",
+                                                title=title,
+                                                color=color)
+    plt.show()
+    data_2018 = df1.loc[get_indexes(df1, "RaceEthnicity", conditional), :].reset_index()
+    data_2018['Country'].value_counts()[:num_countries][::-1].plot(kind="barh",
+                                                title=title2,
+                                                color=color)
+
+
+def get_salary_dataframe(df, race_col, salary_col):
+    """
+    Returns a dataframe that contains descriptive statistics in regards to salary
+    """
+    salary_df = df.loc[get_indexes(df, race_col, is_latinx_or_black), :].reset_index()
+    salary_df = salary_df[salary_df[salary_col].notnull()]
+    return remove_outliers(salary_df, salary_col)[salary_col].describe()
